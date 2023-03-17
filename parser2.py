@@ -29,9 +29,18 @@ def number_parser(data):
     
     
 def string_parser(data):
-    if data[0] == '"':
+    if data.startswith("0x"):  
+        hex_digits = data[2:].strip()  
+        try:
+            decimal_value = int(hex_digits, 16)  
+            return [hex_digits, decimal_value]
+        except ValueError:
+            return None  
+    elif data[0] == '"':  
         data = data[1:]
         pos = data.find('"')
         while pos > 0 and data[pos - 1] == '\\':
             pos = data.find('"', pos + 1)
-        return [data[:pos], data[pos + 1:].strip()]        
+        return [data[:pos], data[pos + 1:].strip()]
+    else:
+        return None  
