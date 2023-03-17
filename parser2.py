@@ -28,6 +28,8 @@ def number_parser(data):
         return [float(matched_str), data[pos:].lstrip()]
     
     
+ """>>> string_parser("0x1a2b3c4d")
+['1a2b3c4d', 439041101] output for string parser hexadecimal """   
 def string_parser(data):
     if data.startswith("0x"):  
         hex_digits = data[2:].strip()  
